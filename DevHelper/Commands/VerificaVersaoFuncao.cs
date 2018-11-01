@@ -16,14 +16,22 @@ namespace DevHelper.Commands
         string textoHelp = "Verifica a versão da função em todos os bancos configurados no arquivo config";
         public override void executar(List<string> parametros)
         {
-
-            foreach (Conexao conexao in DevHelper.conexoes)
+            if (parametros.Count() > 1)
             {
-                if (conexao.exibeVVF == "S" )
+                foreach (Conexao conexao in DevHelper.conexoes)
                 {
-                    verificarVersaoFuncao(conexao, parametros[1]);
+
+                    if (conexao.exibeVVF == "S")
+                    {
+                        verificarVersaoFuncao(conexao, parametros[1]);
+                    }
                 }
             }
+            else
+            {
+                DevHelper.print("Informe o id da função.");
+            }
+            
             
         }
 

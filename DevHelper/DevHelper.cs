@@ -73,6 +73,13 @@ namespace DevHelper
                         DevHelper.print("Função não implementada, aguarde proxima versão...", "S");
                         break;
 
+                    case "verificaparametro":
+                    case "vparam":
+                        criarConexoes();
+                        objComando = new VerificaParametro();
+                        objComando.executar(comando);
+                        break;
+
                     case "criarpacote":
                     case "cp":
                         criarConexoes();
@@ -100,7 +107,9 @@ namespace DevHelper
 
                     case "criarParametro":
                     case "cparam":
-                        DevHelper.print("Função não implementada, aguarde proxima versão...", "S");
+                        criarConexoes();
+                        objComando = new CriarParametro();
+                        objComando.executar(comando);
                         break;
 
                     case "prepararEnvioPacote":
@@ -116,6 +125,10 @@ namespace DevHelper
 
                         DevHelper.print("verificaVersaoFuncao|vvf {id da funcao}", "N");
                         DevHelper.print("- Retorna a versão da função em todos os ambientes do app.config\n", "N");
+
+                        DevHelper.print("verificaparametro|vparam {id da funcao}", "N");
+                        DevHelper.print("- Verifica o valor do parametro em todos os ambientes, traz tambem o id da funcao e o \n", "N");
+                        DevHelper.print("- e a descrição do mesmo no cargosol. \n", "N");
 
                         //DevHelper.print("verificaFuncao|vf {id da funcao}", "N");
                         //DevHelper.print("- Retorna dados da função nos ambientes do app.config\n", "N");
@@ -141,10 +154,10 @@ namespace DevHelper
                         //    "comando é colocado dentro da SC do pacote informado, sendo necessário roda-lo manualmente" +
                         //    " por segurança.\n", "N");
 
-                        //DevHelper.print("criarParametro|cparam {id da pendencia}", "N");
-                        //DevHelper.print("- Cria parametro com os dados informados, mas não compila no banco, o " +
-                        //    "comando é colocado dentro da SC do pacote informado, sendo necessário roda-lo manualmente" +
-                        //    " por segurança.\n", "N");
+                        DevHelper.print("criarParametro|cparam {id da pendencia}", "N");
+                        DevHelper.print("- Cria parametro com os dados informados, mas não compila no banco, o " +
+                            "comando é colocado dentro da SC do pacote informado, sendo necessário roda-lo manualmente" +
+                            " por segurança.\n", "N");
                         break;
                     case "cls":
                         Console.Clear();
@@ -262,21 +275,19 @@ namespace DevHelper
             string caminhoPastaPacote = ConfigurationManager.AppSettings["CaminhoPacote"];
             string[] pacotes = Directory.GetDirectories(caminhoPastaPacote);
             int inicio;
-            int fim;
             string pendenciaAux;
-            string retorno;
+            string retorno = "";
             for (int i = 0; i < pacotes.Length; i++)
             {
                 inicio = pacotes[i].IndexOf("ID")+2;
-                fim = (pacotes[i].IndexOf("") + 2) + 6;
-                pendenciaAux = pacotes[0].Substring(inicio, fim);
+                pendenciaAux = pacotes[i].Substring(inicio, 6);
                 if (pendenciaAux == pendencia)
                 {
-                    retorno = caminhoPastaPacote + "\\" + pacotes[0];
+                    retorno = pacotes[i];
                 }
 
             }
-            return "";
+            return retorno;
         }
     }
 }

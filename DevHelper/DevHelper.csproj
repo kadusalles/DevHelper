@@ -51,10 +51,13 @@
     <Compile Include="Commands\ComparaSP.cs" />
     <Compile Include="Commands\CriarPacote.cs" />
     <Compile Include="Commands\CriarParametro.cs" />
+    <Compile Include="Commands\VerificaParametro.cs" />
     <Compile Include="Commands\VerificaVersaoFuncao.cs" />
     <Compile Include="DevHelper.cs" />
+    <Compile Include="Helpers\Pacote.cs" />
     <Compile Include="Helpers\Parametro.cs" />
     <Compile Include="Helpers\SC.cs" />
+    <Compile Include="Helpers\SP.cs" />
     <Compile Include="Helpers\TxtConfig\Campo.cs" />
     <Compile Include="Helpers\Conexao.cs" />
     <Compile Include="Helpers\TxtConfig\Config.cs" />
@@ -64,7 +67,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.config.example" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
